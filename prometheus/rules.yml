@@ -7,7 +7,7 @@ groups:
         labels:
           severity: critical
         annotations:
-          summary: "Monitor service non-operational"
+          identifier: "{{ $labels.instance }}"
           description: "Service {{ $labels.instance }} is down."
 
   - name: host
@@ -18,7 +18,7 @@ groups:
         labels:
           severity: warning
         annotations:
-          summary: "Server under high load"
+          identifier: "{{ $labels.instance }}"
           description: "CPU load is > 80%. VALUE = {{ $value }}"
 
       - alert: high_memory_load
@@ -27,7 +27,7 @@ groups:
         labels:
           severity: warning
         annotations:
-          summary: "Server memory is almost full"
+          identifier: "{{ $labels.instance }}"
           description: "Docker host memory usage is {{ humanize $value}}%. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
 
       - alert: high_storage_load
@@ -36,7 +36,7 @@ groups:
         labels:
           severity: warning
         annotations:
-          summary: "Server storage is almost full"
+          identifier: "{{ $labels.instance }}"
           description: "Docker host storage usage is {{ humanize $value}}%. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
 
   - name: containers
@@ -47,5 +47,5 @@ groups:
         labels:
           severity: critical
         annotations:
-          summary: "Jenkins down"
+          identifier: "{{ $labels.instance }}"
           description: "Jenkins container is down for more than 30 seconds."
