@@ -12,14 +12,14 @@ groups:
 
   - name: host
     rules:
-      - alert: high_cpu_load
-        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 90
-        for: 30s
-        labels:
-          severity: warning
-        annotations:
-          identifier: "{{ $labels.instance }}"
-          description: "CPU load is > 80%. VALUE = {{ $value }}"
+      # - alert: high_cpu_load
+      #   expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 90
+      #   for: 30s
+      #   labels:
+      #     severity: warning
+      #   annotations:
+      #     identifier: "{{ $labels.instance }}"
+      #     description: "CPU load is > 80%. VALUE = {{ $value }}"
 
       - alert: high_memory_load
         expr: (sum(node_memory_MemTotal_bytes) - sum(node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes) ) / sum(node_memory_MemTotal_bytes) * 100 > 85
